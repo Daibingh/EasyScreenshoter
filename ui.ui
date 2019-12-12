@@ -79,6 +79,9 @@
       </item>
       <item>
        <widget class="QLabel" name="label_4">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
         <property name="text">
          <string>Apply for a token</string>
         </property>

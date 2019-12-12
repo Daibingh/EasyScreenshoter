@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['mainwindow.py'],
+a = Analysis(['EasyScreenshoter.py'],
              pathex=['E:\\pyqt-project\\EasyScreenshoter'],
              binaries=[],
              datas=[],
@@ -21,16 +21,16 @@ exe = EXE(pyz,
           a.scripts,
           [],
           exclude_binaries=True,
-          name='mainwindow',
+          name='EasyScreenshoter',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=False )
+          console=False , icon='icon.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
                strip=False,
                upx=True,
-               name='mainwindow')
+               name='EasyScreenshoter')

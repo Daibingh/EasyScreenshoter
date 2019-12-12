@@ -810,7 +810,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.thread.uploaded.connect(self.handleUploaded)
         self.thread.error.connect(self.handleUploadedError)
 
-        self.setStyleSheet(styleSheet)        
+        self.setStyleSheet(styleSheet)      
 
     def closeEvent(self, event):
         conf = {
