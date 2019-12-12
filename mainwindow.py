@@ -797,6 +797,8 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.lineEdit.setText('')  # prefix
         self.lineEdit_2.setText('.')  # path
         self.lineEdit_3.setText(str(self.picQuality))
+        self.label_4.setOpenExternalLinks(True)
+        self.label_4.setText('<a href="https://github.com/settings/tokens">Apply for a token</a>')
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowMaximizeButtonHint)
 
         self.d = Dialog(self)
