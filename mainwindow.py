@@ -645,6 +645,11 @@ class Dialog(QDialog, Ui_Dialog):
     def on_buttonBox_accepted(self):
         self._p.repo = self.lineEdit_2.text()
         self._p.token = self.lineEdit.text()
+        try:
+            g = Github(self._p.token)
+            repo = g.get_repo(self._p.repo)
+        except Exception as e:
+            QMessageBox.warning(self, "Error", "Cannot content to your repo!")
  
 
 class LoadThread(QThread):

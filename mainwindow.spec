@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['mainwindow.py'],
-             pathex=['E:\\pyqt-project\\basic'],
+             pathex=['E:\\pyqt-project\\EasyScreenshoter'],
              binaries=[],
              datas=[],
              hiddenimports=[],
