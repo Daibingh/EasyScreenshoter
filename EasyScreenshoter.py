@@ -791,14 +791,16 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.token = '****'
         conf = self.loadConfig()
         if conf is not None:
-            self.repo = conf['repo']
-            self.token = conf['token']
+            self.repo = conf.get('repo', self.repo)
+            self.token = conf.get('token', self.token)
+            self.lineEdit.setText(conf.get('prefix', ''))
+            self.lineEdit_2.setText(conf.get('path', '.'))
         self.picQuality = 10
-        self.lineEdit.setText('')  # prefix
-        self.lineEdit_2.setText('.')  # path
         self.lineEdit_3.setText(str(self.picQuality))
+        self.lineEdit_3.setMaximumWidth(40)
         self.label_4.setOpenExternalLinks(True)
-        self.label_4.setText('<a href="https://github.com/settings/tokens">Apply for a token</a>')
+        self.label_4.setText('<a href="https://github.com/settings/tokens">token</a>')
+        self.label_4.setToolTip("Apply for a token on github.")
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowMaximizeButtonHint)
 
         self.d = Dialog(self)
@@ -815,7 +817,9 @@ class MyWindow(QMainWindow, Ui_MainWindow):
     def closeEvent(self, event):
         conf = {
         'token': self.token,
-        'repo': self.repo
+        'repo': self.repo,
+        'path': self.lineEdit_2.text(),
+        'prefix': self.lineEdit.text()
         }
         with open('.config', 'w', encoding='utf-8') as f:
             json.dump(conf, f)
