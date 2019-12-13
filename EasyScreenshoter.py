@@ -16,6 +16,7 @@ import os.path
 from github import Github
 import json
 from style import styleSheet
+from pyqtkeybind import keybinder
 
 def toRectF(rect):
     return QRectF(
@@ -891,8 +892,31 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             print("input error: the quality input must be a int number ranging in 0~100.")
 
 
+class WinEventFilter(QAbstractNativeEventFilter):
+    def __init__(self, keybinder):
+        self.keybinder = keybinder
+        super().__init__()
+
+    def nativeEventFilter(self, eventType, message):
+        ret = self.keybinder.handler(eventType, message)
+        return ret, 0
+
+
 if __name__ == '__main__':
+    def callback():
+        w.on_pushButton_clicked()
+
     app = QApplication(sys.argv)
     w = MyWindow()
+
+    keybinder.init()
+    keybinder.register_hotkey(w.winId(), "Ctrl+Shift+M", callback)
+    # Install a native event filter to receive events from the OS
+    win_event_filter = WinEventFilter(keybinder)
+    event_dispatcher = QAbstractEventDispatcher.instance()
+    event_dispatcher.installNativeEventFilter(win_event_filter)
+
     w.show()
     sys.exit(app.exec_())
+
+    keybinder.unregister_hotkey(w.winId(), "Ctrl+Shift+M")

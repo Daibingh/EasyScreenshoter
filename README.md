@@ -6,11 +6,11 @@
 - 或者，截图保存在本地，同时自动导出图片 markdown 本地引用连接到剪贴板
 - 浏览远端仓库文件列表
 - 删除远端仓库文件
+- shortcut `Ctrl+Shift+M`
 
 主界面：
 
 <center><img src="images/mainwindow.png" width="600px"></center>
-
 登陆远程仓库界面
 
 <center><img src="images/login.png" width="600px"></center>
