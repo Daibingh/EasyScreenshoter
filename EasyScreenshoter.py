@@ -861,8 +861,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             QApplication.clipboard().setText(copyLink)
             pixmap.save(fullName, 'PNG', self.picQuality)
         else:
-            copyLink = '<center><img src="https://github.com/{}/blob/master/{}?raw=true" \
-            width="600px"></center>'.format(self.repo, imgName)
+            copyLink = '<center><img src="https://github.com/{}/blob/master/{}?raw=true" width="600px"></center>'.format(self.repo, imgName)
             QApplication.clipboard().setText(copyLink)
             self.thread.pixmap = pixmap
             self.thread.imgName = imgName
