@@ -753,6 +753,10 @@ class Dialog2(QDialog, Ui_Dialog2):
         self.pushButton.setEnabled(False)
         self.pushButton_2.setEnabled(False)
 
+    def on_tableWidget_cellDoubleClicked(self, row, col):
+        copyLink = '<center><img src="{}" width="600px"></center>'.format(self.tableWidget.item(row, 1).text())
+        QApplication.clipboard().setText(copyLink)
+
 
 class UploadThread(QThread):
     """docstring for UploadThread"""
@@ -861,7 +865,8 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             QApplication.clipboard().setText(copyLink)
             pixmap.save(fullName, 'PNG', self.picQuality)
         else:
-            copyLink = '<center><img src="https://github.com/{}/blob/master/{}?raw=true" width="600px"></center>'.format(self.repo, imgName)
+            # copyLink = '<center><img src="https://github.com/{}/blob/master/{}?raw=true" width="600px"></center>'.format(self.repo, imgName)
+            copyLink = '<center><img src="https://raw.githubusercontent.com/{}/master/{}" width="600px"></center>'.format(self.repo, imgName)
             QApplication.clipboard().setText(copyLink)
             self.thread.pixmap = pixmap
             self.thread.imgName = imgName
