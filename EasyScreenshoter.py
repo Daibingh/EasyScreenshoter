@@ -754,8 +754,9 @@ class Dialog2(QDialog, Ui_Dialog2):
         self.pushButton_2.setEnabled(False)
 
     def on_tableWidget_cellDoubleClicked(self, row, col):
-        copyLink = '<center><img src="{}" width="600px"></center>'.format(self.tableWidget.item(row, 1).text())
-        QApplication.clipboard().setText(copyLink)
+        # copyLink = '<center><img src="{}" width="600px"></center>'.format(self.tableWidget.item(row, 1).text())
+        # QApplication.clipboard().setText(copyLink)
+        self._p.show_link(self.tableWidget.item(row, 1).text())
 
 
 class UploadThread(QThread):
@@ -861,18 +862,16 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                 copyName = fullName.split(os.path.sep)[-1]
             elif self.comboBox.currentText()=='-2':
                 copyName = '/'.join(fullName.split(os.path.sep)[-2:])
-            copyLink = '<center><img src="{}" width="600px"></center>'.format(copyName)
-            QApplication.clipboard().setText(copyLink)
+            link = copyName
             pixmap.save(fullName, 'PNG', self.picQuality)
         else:
-            # copyLink = '<center><img src="https://github.com/{}/blob/master/{}?raw=true" width="600px"></center>'.format(self.repo, imgName)
-            copyLink = '<center><img src="https://raw.githubusercontent.com/{}/master/{}" width="600px"></center>'.format(self.repo, imgName)
-            QApplication.clipboard().setText(copyLink)
+            link = 'https://raw.githubusercontent.com/{}/master/{}'.format(self.repo, imgName)
             self.thread.pixmap = pixmap
             self.thread.imgName = imgName
             self.thread.start()
             self.pushButton.setEnabled(False);
 
+        self.show_link(link)
         self.ws.ignore = True
 
     def on_pushButton_clicked(self):
@@ -895,6 +894,19 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         except Exception as e:
             print("input error: the quality input must be a int number ranging in 0~100.")
 
+    def show_link(self, link):
+        self.lineEdit_link1.setText("![]({})".format(link))
+        self.lineEdit_link2.setText('<center><img src="{}"></center>'.format(link))
+        self.lineEdit_link3.setText('<center><img src="{}" width="600px"></center>'.format(link))
+
+    def on_pushButton_copy1_clicked(self):
+        QApplication.clipboard().setText(self.lineEdit_link1.text())
+
+    def on_pushButton_copy2_clicked(self):
+        QApplication.clipboard().setText(self.lineEdit_link2.text())
+
+    def on_pushButton_copy3_clicked(self):
+        QApplication.clipboard().setText(self.lineEdit_link3.text())
 
 class WinEventFilter(QAbstractNativeEventFilter):
     def __init__(self, keybinder):
