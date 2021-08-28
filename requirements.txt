@@ -1,3 +1,2 @@
-PyGithub==1.44.1
-PyQt5==5.8.2
-PyQt5-sip==4.19.14
+pyqtkeybind==0.0.4
+PyGithub==1.55

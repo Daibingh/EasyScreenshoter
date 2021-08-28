@@ -792,7 +792,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MyWindow, self).__init__(parent)
         self.setupUi(self)
-        self.setWindowTitle('便捷截图')
+        self.setWindowTitle('MD便捷截图')
         self.repo = 'Username/reponame'
         self.token = '****'
         conf = self.loadConfig()
@@ -807,6 +807,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.label_4.setOpenExternalLinks(True)
         self.label_4.setText('<a href="https://github.com/settings/tokens">token</a>')
         self.label_4.setToolTip("Apply for a token on github.")
+        self.actionremote.setChecked(False)
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowMaximizeButtonHint)
 
         self.d = Dialog(self)
@@ -873,6 +874,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
         self.show_link(link)
         self.ws.ignore = True
+        self.on_pushButton_copy1_clicked()
 
     def on_pushButton_clicked(self):
         self.ws.launch()
