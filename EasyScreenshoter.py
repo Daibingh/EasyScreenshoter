@@ -12,6 +12,7 @@ from ui import Ui_MainWindow
 from dialog import Ui_Dialog
 from dialog2 import Ui_Dialog as Ui_Dialog2
 import uuid
+import datetime
 import os.path
 from github import Github
 import json
@@ -53,6 +54,9 @@ def normalizeRect(rect):
 def generateName():
     return uuid.uuid4().hex
 
+def get_name():
+    dt = datetime.datetime.utcnow() + datetime.timedelta(hours=8)
+    return dt.strftime('%Y_%m_%d_%H_%M_%S')
 
 class WScreenshot(QWidget):
     """
@@ -850,9 +854,9 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         pixmap = self.ws.output
         prefix = self.lineEdit.text()
         if len(prefix)==0:
-            imgName = "{}.png".format(generateName())
+            imgName = "{}.png".format(get_name())
         else:
-            imgName = "{}_{}.png".format(prefix, generateName())
+            imgName = "{}_{}.png".format(prefix, get_name())
 
         if not self.actionremote.isChecked():
             folder = self.lineEdit_2.text()
